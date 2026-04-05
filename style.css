@@ -4,6 +4,11 @@
     margin: 0;           /* Remove margens padrão do navegador */
     padding: 0;          /* Remove preenchimentos padrão do navegador */
     box-sizing: border-box; /* Garante que bordas e padding não aumentem o tamanho total do elemento */
+
+    /* BLOQUEIO DE SELEÇÃO GLOBAL */
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none; /* Bloqueia menu de salvar imagem no Mobile */
 }
 
 body {
@@ -145,6 +150,12 @@ header.header-premium {
     object-fit: cover;            /* Faz a imagem preencher o fundo sem esticar */
     filter: brightness(0.6);      /* Escurece a imagem em 40% para dar leitura ao texto */
     transition: opacity 0.8s ease; /* Suaviza quando a imagem aparece ou muda */
+}
+
+img {
+    pointer-events: none;      /* Impede qualquer interação direta com a imagem */
+    -webkit-user-drag: none;   /* Impede o arrasto no Chrome/Safari */
+    user-drag: none;
 }
 
 .sombra-inferior {

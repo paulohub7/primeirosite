@@ -1,19 +1,15 @@
 /* --- RESET E BÁSICOS --- */
-/* O seletor '*' aplica as regras a todos os elementos da página */
 * {
-    margin: 0;           /* Remove margens padrão do navegador */
-    padding: 0;          /* Remove preenchimentos padrão do navegador */
-    box-sizing: border-box; /* Garante que bordas e padding não aumentem o tamanho total do elemento */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 
-    /* BLOQUEIO DE SELEÇÃO GLOBAL */
+    /* BLOQUEIO DE SELEÇÃO E CONTEXTO GLOBAL */
     user-select: none;
-    -webkit-user-select: none;
+    -webkit-user-select: none;   /* Chrome, Safari, Android */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* IE/Edge */
     -webkit-touch-callout: none; /* Bloqueia menu de salvar imagem no Mobile */
-    -webkit-user-select: none;
-    user-select: none;
-
-    /* DESATIVA O MENU DE CONTEXTO NO MOBILE (Salvar imagem, Copiar link) */
-    -webkit-touch-callout: none; 
 }
 
 body {

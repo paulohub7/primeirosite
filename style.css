@@ -1,251 +1,337 @@
 /* --- RESET E BÁSICOS --- */
+/* O seletor '*' aplica as regras a todos os elementos da página */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;           /* Remove margens padrão do navegador */
+    padding: 0;          /* Remove preenchimentos padrão do navegador */
+    box-sizing: border-box; /* Garante que bordas e padding não aumentem o tamanho total do elemento */
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'DynaPuff', sans-serif; /* Define a fonte principal (precisa estar importada no HTML) */
+    /* Cria um fundo degradê do azul escuro para um tom levemente mais claro */
     background: linear-gradient(to bottom, #0d1a26 0%, #1a2e41 40%, #2c3e50 100%);
-    background-attachment: fixed; 
-    color: #f0f0f0;
-    min-height: 100vh;
-    overflow-x: hidden;
+    background-attachment: fixed; /* Faz com que o fundo fique parado enquanto o conteúdo rola */
+    color: #f0f0f0;               /* Define a cor do texto como um branco acinzentado */
+    min-height: 100vh;            /* Garante que o corpo tenha no mínimo a altura total da tela */
+    overflow-x: hidden;           /* Evita que apareça uma barra de rolagem horizontal indesejada */
 }
 
 /* --- HEADER ADAPTATIVO --- */
 header.header-premium {
-    padding: 20px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    width: 100%;
-    z-index: 100;
-    pointer-events: none; 
+    padding: 20px 5%;             /* Espaçamento interno: 20px topo/base e 5% nas laterais */
+    display: flex;                /* Ativa o Flexbox para alinhar os itens internos */
+    justify-content: space-between; /* Empurra o logo para a esquerda e o perfil para a direita */
+    align-items: center;          /* Alinha os itens verticalmente ao centro */
+    position: absolute;           /* Posiciona o header sobre o conteúdo da Hero */
+    width: 100%;                  /* Ocupa toda a largura da tela */
+    z-index: 100;                 /* Garante que o header fique acima de todos os outros elementos */
+    pointer-events: none;         /* Faz o clique "atravessar" a área vazia do header */
 }
 
-.logo-premium {
-    pointer-events: auto;
-    font-family: 'Cinzel', serif;
+.logo-premium { /* Estilização do logo no header */
+    pointer-events: auto; /* Permite que o logo seja clicável, mesmo com 'pointer-events: none' no header */
+    font-family: 'DynaPuff', cursive; /* DynaPuff é uma fonte 'cursive', não 'serif' */
     font-size: clamp(1rem, 4vw, 1.5rem);
     font-weight: 900;
     color: white;
     text-shadow: 2px 2px 0px rgba(255, 179, 71, 0.4);
+    
+    /* --- BLOQUEIO DE SELEÇÃO --- */
+    user-select: none;           /* Padrão moderno */
+    -webkit-user-select: none;    /* Safari e Chrome Mobile */
+    -webkit-touch-callout: none;  /* Impede o menu de 'copiar' ao segurar no celular */
+    
+    /* --- TRANSIÇÃO SUAVE --- */
+    /* Garante que o texto volte ao tamanho normal suavemente quando você soltar o clique */
+    transition: transform 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+    
+    display: inline-block; /* Importante para que o 'transform' funcione 100% no mobile */
 }
 
-.logo-premium span { color: #FFB347; }
+.logo-premium:active { /* Efeito para quando o dedo pressiona (Mobile) ou o mouse clica (PC) */
+    transform: scale(1.1); /* Aumenta 10% */
+    color: #FFB347;        /* Muda para a cor ouro */
+    text-shadow: 0 0 15px rgba(255, 179, 71, 0.8); /* Brilho intenso */
+    
+    /* No momento do clique, a transição é mais rápida para dar sensação de resposta imediata */
+    transition: transform 0.1s; 
+}
+
+.logo-premium span { 
+    color: #FFB347;               /* Cor de destaque para a parte específica do logo */
+}
 
 /* --- PERFIL CLEAN --- */
-.user-profile { pointer-events: auto; }
+.user-profile { 
+    pointer-events: auto;         /* Reativa os cliques na área de perfil */
+}
 
 .btn-perfil-clean {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(0, 0, 0, 0.2); 
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 6px 18px 6px 6px;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    display: flex;                /* Alinha avatar e nome em linha */
+    align-items: center;          /* Centraliza verticalmente */
+    gap: 12px;                    /* Espaço entre o avatar e o texto */
+    background: rgba(0, 0, 0, 0.2); /* Fundo preto bem transparente */
+    backdrop-filter: blur(10px);  /* Efeito de vidro embaçado (Glassmorphism) */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Borda fina e transparente */
+    padding: 6px 18px 6px 6px;    /* Padding assimétrico para o texto ficar distante da borda */
+    border-radius: 40px;          /* Deixa o botão totalmente arredondado */
+    cursor: pointer;              /* Muda o mouse para a mãozinha de clique */
+    transition: all 0.3s ease;    /* Suaviza mudanças de cor ou tamanho */
 }
 
 .avatar-container {
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid #FFB347;
-    border-radius: 50%;
-    display: flex;
+    width: 32px;                  /* Largura fixa do círculo do avatar */
+    height: 32px;                 /* Altura fixa do círculo do avatar */
+    background: rgba(255, 255, 255, 0.1); /* Fundo base caso a imagem demore a carregar */
+    border: 2px solid #FFB347;    /* Borda dourada ao redor do avatar */
+    border-radius: 50%;           /* Garante o formato circular */
+    display: flex;                /* Centraliza a imagem interna */
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: hidden;             /* Corta qualquer parte da imagem que saia do círculo */
 }
 
-.avatar-clean { width: 100%; height: 100%; object-fit: cover; }
+.avatar-clean { 
+    width: 100%;                  /* Imagem ocupa 100% da largura do container */
+    height: 100%;                 /* Imagem ocupa 100% da altura do container */
+    object-fit: cover;            /* Ajusta a imagem sem distorcer, preenchendo o círculo */
+}
 
-.btn-perfil-clean span {
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 0.8rem;
-    text-transform: uppercase;
+.btn-perfil-clean { /*  um ajuste de transição */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais "elástica" */
+}
+
+.btn-perfil-clean:hover { /* Quando o mouse passa por cima do BOTÃO INTEIRO */
+
+    background: rgba(255, 255, 255, 0.3); /* Fundo fica um pouco mais claro */
+    border-color: #FFB347;               /* A borda acende na cor do tema */
+    transform: translateY(-2px);         /* Ele sobe de leve */
+    box-shadow: 0 4px 15px rgba(255, 179, 71, 0.3); /* Brilho suave dourado */
+}
+
+
+.btn-perfil-clean:hover span { /* Quando o mouse passa, o TEXTO muda de cor */
+    color: #FFB347; 
+}
+
+.btn-perfil-clean:active { /* Efeito ao clicar no botão de perfil */
+    transform: scale(0.95); /* Ele "encolhe" um pouquinho ao ser apertado */
+    background: rgba(255, 179, 71, 0.2); /* Fica levemente dourado ao fundo */
+}
+
+.btn-perfil-clean:hover .avatar-container { /* Efeito de hover para o avatar também, para dar mais feedback visual */
+    border-color: white; /* A moldura da foto fica branca para destacar */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Brilho suave ao redor do avatar */
 }
 
 /* --- HERO SECTION --- */
-.hero-expedicao {
-    min-height: 85vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding: 100px 6% 120px;
+.hero-iniciar-aventura {
+    min-height: 85vh;             /* Ocupa no mínimo 85% da altura da tela */
+    position: relative;           /* Referência para os elementos posicionados com 'absolute' dentro dela */
+    display: flex;                /* Ativa flexbox */
+    align-items: center;          /* Centraliza o conteúdo verticalmente */
+    padding: 100px 6% 120px;      /* Espaçamento interno para evitar o header e dar margem lateral */
 }
 
 .hero-imagem-fundo {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 1;
+    position: absolute;           /* Coloca a div atrás do conteúdo */
+    top: 0; left: 0; 
+    width: 100%; height: 100%;    /* Ocupa toda a área da seção hero */
+    z-index: 1;                   /* Fica na camada mais baixa */
 }
 
 .img-fundo {
     width: 100%; height: 100%;
-    object-fit: cover;
-    filter: brightness(0.6);
-    transition: opacity 0.8s ease; /* Transição suave da imagem */
+    object-fit: cover;            /* Faz a imagem preencher o fundo sem esticar */
+    filter: brightness(0.6);      /* Escurece a imagem em 40% para dar leitura ao texto */
+    transition: opacity 0.8s ease; /* Suaviza quando a imagem aparece ou muda */
 }
 
 .sombra-inferior {
     position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 80%; 
+    bottom: 0; left: 0; 
+    width: 100%; height: 80%;     /* Cobre 80% da imagem a partir do fundo */
+    /* Cria um degradê que vai do azul escuro sólido até o transparente */
     background: linear-gradient(to top, #1a2e41 10%, transparent 100%);
-    z-index: 2;
+    z-index: 2;                   /* Fica acima da imagem, mas abaixo do texto */
 }
 
 .divisor-curvo {
     position: absolute;
-    bottom: -1px; left: 0; width: 100%; height: 80px;
-    background: #1a2e41;
+    bottom: -1px; left: 0; 
+    width: 100%; height: 80px;    /* Altura da curva decorativa */
+    background: #1a2e41;          /* Mesma cor da próxima seção */
+    /* Cria o formato de arco/elipse no fundo da seção */
     clip-path: ellipse(85% 100% at 50% 100%);
-    z-index: 5;
+    z-index: 5;                   /* Fica acima da sombra inferior */
 }
 
 /* --- CONTEÚDO HERO & TRANSIÇÕES --- */
 .conteudo-hero-premium {
     width: 100%;
-    max-width: 800px;
+    max-width: 800px;             /* Limita a largura do texto para melhor leitura */
     position: relative;
-    z-index: 10;
+    z-index: 10;                  /* Fica acima de todas as imagens e sombras */
+    /* Prepara as propriedades para transições de animação */
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .conteudo-transicao {
-    opacity: 0;
-    transform: translateY(20px);
+    opacity: 0;                   /* Começa invisível */
+    transform: translateY(20px);  /* Começa 20 pixels abaixo da posição original */
+    /* Transição com "bounce" (curva de Bézier) para efeito mais dinâmico */
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+/* Classe que será adicionada via JavaScript para disparar a animação */
 .conteudo-transicao.active {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1;                   /* Torna visível */
+    transform: translateY(0);     /* Move para a posição original */
 }
 
-.info-meta {
-    display: inline-block;
-    background: #FFB347;
-    color: #0d1a26;
-    padding: 5px 15px;
-    border-radius: 8px;
-    font-size: 0.7rem;
-    font-weight: 900;
-    margin-bottom: 15px;
+.info-meta { /* Texto pequeno acima do título para contextualizar a seção */
+    font-family: 'Syncopate', cursive; /* Fonte divertida e de estilo quadrinhos */
+    display: inline-block;        /* Faz o fundo envolver apenas o texto */
+    background: #FFB347;          /* Fundo laranja dourado */
+    color: #0d1a26;               /* Texto azul escuro */
+    padding: 5px 15px;            /* Espaçamento interno */
+    border-radius: 8px;           /* Cantos levemente arredondados */
+    font-size: 0.7rem;            /* Texto bem pequeno */
+    font-weight: 900;             /* Texto bem grosso */
+    margin-bottom: 15px;          /* Espaço para o título abaixo */
 }
 
 .titulo-epico {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(2rem, 8vw, 4.5rem);
+    font-family: 'DynaPuff', serif; 
+    font-size: clamp(2rem, 8vw, 4.5rem); /* Título grande e responsivo */
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1.1;             /* Aproxima as linhas do título */
     margin-bottom: 20px;
-    text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.3); /* Sombra sólida para profundidade */
 }
 
-.legenda {
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    color: #e0e0e0;
-    margin-bottom: 35px;
-    max-width: 550px;
+.legenda { /* Texto de apoio abaixo do título */
+    font-family: Syncopate, cursive; /* Fonte divertida e de estilo quadrinhos */
+    font-size: clamp(1rem, 3vw, 1.2rem); /* Texto de apoio responsivo */
+    color: #ffffff;               /* Branco acinzentado */
+    margin-bottom: 35px;          /* Espaço para o botão abaixo */
+    max-width: 550px;             /* Limita largura para não ficar linhas muito longas */  
 }
 
-.btn-expedicao {
-    padding: 18px 45px;
-    background: #FFB347;
-    color: #0d1a26;
-    border: none;
-    border-radius: 50px;
-    font-weight: 900;
+.btn-iniciar-aventura { /* Botão de ação principal na hero */
+    padding: 18px 45px;           /* Botão grande e clicável */
+    background: #FFB347;          /* Cor de destaque */
+    color: #0d1a26;               /* Texto escuro */
+    border: none;                 /* Remove borda padrão */
+    border-radius: 50px;          /* Formato pílula */
+    font-weight: 900;       /* Texto em negrito para chamar atenção */
     font-size: 1rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    box-shadow: 0 6px 0px #c28836;
-    transition: 0.2s;
+    text-transform: uppercase;          /* Deixa o texto em maiúsculas */
+    cursor: pointer;     /* Muda o mouse para a mãozinha de clique */
+    box-shadow: 0 6px 0px #c28836; /* Sombra sólida embaixo para efeito 3D de botão */
+    transition: 0.2s;             /* Suaviza a animação de clique */
 }
 
-.btn-expedicao:active {
-    transform: translateY(4px);
-    box-shadow: 0 2px 0px #c28836;
+.btn-iniciar-aventura:active { /* Efeito ao clicar no botão */
+    transform: translateY(4px);    /* Move o botão 4 pixels para baixo */
+    box-shadow: 0 2px 0px #c28836; /* Diminui a sombra para 2px (parece que encostou no fundo) */
 }
 
 /* --- CARDS ADAPTATIVOS --- */
-.galeria-descobretas {
-    padding: 60px 6% 80px;
-    background-color: #1a2e41;
+.galeria-descobretas { /* Seção de cards abaixo da hero */
+    padding: 60px 6% 80px;        /* Espaçamento interno da seção de cards */
+    background-color: #1a2e41;    /* Cor de fundo sólida */
     position: relative;
-    z-index: 20;
+    z-index: 20;                  /* Fica acima da hero */
 }
 
-.titulo-secao-premium {
-    font-family: 'Cinzel', serif;
-    font-size: 1.8rem;
-    margin-bottom: 30px;
+.titulo-secao-premium { /* Título da seção de cards */
+    font-family: 'Cinzel', serif; /* Fonte com estilo clássico/épico */
+    color: #FFB347;               /* Cor de destaque laranja dourado */
+    font-size: 1.8rem;           /* Tamanho grande para destacar a seção */
+    margin-bottom: 30px;         /* Espaço abaixo do título para separar dos cards */
 }
 
-.carrossel-premium {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 30px;
-    scrollbar-width: none;
+.carrossel-premium { /* Container dos cards com estilo de carrossel horizontal */
+    display: flex;                /* Coloca os cards lado a lado */
+    gap: 20px;                    /* Espaço entre os cards */
+    overflow-x: auto;             /* Permite rolar para os lados se os cards estourarem a tela */
+    padding-bottom: 30px;         /* Espaço para a sombra dos cards não ser cortada */
+    scrollbar-width: none;        /* Esconde barra de rolagem no Firefox */
 }
 
+/* Esconde barra de rolagem no Chrome, Safari e Edge */
 .carrossel-premium::-webkit-scrollbar { display: none; }
 
-.card-premium {
-    min-width: 220px;
-    max-width: 260px;
-    height: 350px;
-    flex-shrink: 0;
+.card-premium { /* Estilização básica dos cards */
+    min-width: 220px;             /* Largura mínima de cada card */
+    max-width: 260px;             /* Largura máxima de cada card */
+    height: 350px;                /* Altura fixa dos cards */
+    flex-shrink: 0;               /* Impede que o flexbox amasse o card */
     border-radius: 15px;
-    overflow: hidden;
+    overflow: hidden;             /* Garante que a imagem respeite o arredondamento */
     position: relative;
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: all 0.4s ease;    /* Suaviza o efeito de hover */
     background: #0d1a26;
-    border: 2px solid transparent;
+    border: 2px solid transparent; /* Borda invisível por padrão */
 }
 
-.card-premium img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+.card-premium img { /* Imagem dentro do card */
+    width: 100%; /* Imagem ocupa toda a largura do card */
+    height: 100%; /* Imagem ocupa toda a altura do card */
+    object-fit: cover;            /* Imagem preenche o card sem distorcer */
+    transition: transform 0.5s ease; /* Suaviza o zoom no hover */
 }
 
+/* Efeito ao passar o mouse no card */
 .card-premium:hover {
-    transform: translateY(-10px);
-    border-color: #FFB347;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    transform: translateY(-0px); /* Move o card para cima */
+    border-color: #FFB347;        /* Acende a borda dourada */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5); /* Sombra forte para efeito de flutuação */
 }
 
-.card-premium:hover img { transform: scale(1.1); }
+.card-premium:hover img { /* Efeito de zoom na imagem ao passar o mouse */
+    transform: scale(1.1);        /* Dá um leve zoom na imagem interna */
+}
 
-.card-premium-info {
-    position: absolute;
+.card-premium-info { /* Container para as informações sobre o card */
+    position: absolute;           /* Posiciona as informações sobre o card */
     bottom: 0; width: 100%;
     padding: 25px 15px 15px;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 30%, transparent);
+    /* Degradê preto no fundo do texto para garantir leitura sobre a imagem */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 30%, transparent);
 }
 
-/* --- MEDIA QUERIES --- */
+/* --- MEDIA QUERIES (RESPONSIVIDADE) --- */
+/* Regras para tablets e celulares grandes (até 768px) */
 @media (max-width: 768px) {
-    .hero-expedicao { text-align: center; justify-content: center; }
-    .legenda { margin: 0 auto 30px; }
+    .hero-iniciar-aventura { 
+        text-align: center;       /* Centraliza o texto */
+        justify-content: center;  /* Centraliza o conteúdo no Flexbox */
+    }
+    .legenda { 
+        margin: 0 auto 30px;      /* Centraliza a legenda horizontalmente */
+    }
 }
 
-@media (max-width: 480px) {
-    .btn-perfil-clean span { display: none; }
-    .btn-perfil-clean { padding: 6px; }
-    .card-premium { min-width: 190px; height: 280px; }
-    .btn-expedicao { width: 100%; }
+/* Regras para celulares pequenos (até 480px) */
+@media (max-width: 480px) { /* Estilos específicos para telas muito pequenas */
+    
+    .btn-perfil-clean span { display: none; } /* Esconde o nome do usuário, deixa só o avatar */
+    .btn-perfil-clean { padding: 6px; }       /* Reduz o botão ao formato do círculo */
+    .card-premium { 
+        min-width: 190px;         /* Cards um pouco menores */
+        height: 280px;            /* Altura menor para caber na tela do celular */
+    }
+    .btn-iniciar-aventura { width: 100%; } /* Botão de ação ocupa toda a largura da tela */
+}
+
+/* Definindo os passos do balanço */
+@keyframes balancar {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
 }

@@ -83,6 +83,10 @@ header.header-premium {
     border-radius: 40px;          /* Deixa o botão totalmente arredondado */
     cursor: pointer;              /* Muda o mouse para a mãozinha de clique */
     transition: all 0.3s ease;    /* Suaviza mudanças de cor ou tamanho */
+    -webkit-tap-highlight-color: transparent; /* 1. Remove o brilho de toque do mobile */
+    outline: none;                            /* 2. Remove a borda de contorno padrão do navegador */
+    -webkit-user-select: none;                /* 3. Garante que o texto não seja selecionável */
+    user-select: none;
 }
 
 .avatar-container {
@@ -245,6 +249,10 @@ img {
     box-shadow: 0 6px 0px #c28836; /* Sombra sólida embaixo para efeito 3D de botão */
     transition: 0.2s;             /* Suaviza a animação de clique */
     outline: none; /* Remove a borda de foco padrão */
+    -webkit-tap-highlight-color: transparent; /* 1. Remove o brilho de toque do mobile */
+    outline: none;                            /* 2. Remove a borda de contorno padrão do navegador */
+    -webkit-user-select: none;                /* 3. Garante que o texto não seja selecionável */
+    user-select: none;
 }
 
 .btn-iniciar-aventura:active { /* Efeito ao clicar no botão */

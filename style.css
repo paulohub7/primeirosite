@@ -235,29 +235,38 @@ img {
     max-width: 550px;             /* Limita largura para não ficar linhas muito longas */  
 }
 
-.btn-iniciar-aventura { /* Botão de ação principal na hero */
-    padding: 18px 45px;           /* Botão grande e clicável */
-    background: #FFB347;          /* Cor de destaque */
-    color: #0d1a26;               /* Texto escuro */
-    border: none;                 /* Remove borda padrão */
-    border-radius: 50px;          /* Formato pílula */
-    font-weight: 900;       /* Texto em negrito para chamar atenção */
-    -webkit-tap-highlight-color: transparent; /* Remove o destaque azul no mobile */
-    font-size: 1rem;              /* Tamanho do texto */
-    text-transform: uppercase;          /* Deixa o texto em maiúsculas */
-    cursor: pointer;     /* Muda o mouse para a mãozinha de clique */
-    box-shadow: 0 6px 0px #c28836; /* Sombra sólida embaixo para efeito 3D de botão */
-    transition: 0.2s;             /* Suaviza a animação de clique */
-    outline: none; /* Remove a borda de foco padrão */
-    -webkit-tap-highlight-color: transparent; /* 1. Remove o brilho de toque do mobile */
-    outline: none;                            /* 2. Remove a borda de contorno padrão do navegador */
-    -webkit-user-select: none;                /* 3. Garante que o texto não seja selecionável */
-    user-select: none;
+.btn-iniciar-aventura {
+    padding: 18px 45px;
+    background: #FFB347;
+    color: #0d1a26;
+    border: none;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 6px 0px #c28836;
+    transition: 0.2s;
+
+    /* --- PROTEÇÃO MOBILE --- */
+    -webkit-tap-highlight-color: transparent; /* Remove o brilho ao tocar */
+    -webkit-touch-callout: none;              /* Remove menu de contexto */
+    user-select: none;                        /* Impede selecionar o texto */
+    outline: none !important;                 /* Remove a borda de foco */
 }
 
-.btn-iniciar-aventura:active { /* Efeito ao clicar no botão */
-    transform: translateY(4px);    /* Move o botão 4 pixels para baixo */
-    box-shadow: 0 2px 0px #c28836; /* Diminui a sombra para 2px (parece que encostou no fundo) */
+/* Remove a borda que aparece DEPOIS que você clica (o "foco") */
+.btn-iniciar-aventura:focus, 
+.btn-iniciar-aventura:active,
+.btn-iniciar-aventura:focus-visible {
+    outline: none !important;
+    box-shadow: 0 6px 0px #c28836; /* Mantém sua sombra original no foco */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.btn-iniciar-aventura:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0px #c28836;
 }
 
 /* --- CARDS ADAPTATIVOS --- */

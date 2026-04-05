@@ -1,0 +1,251 @@
+/* --- RESET E BÁSICOS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom, #0d1a26 0%, #1a2e41 40%, #2c3e50 100%);
+    background-attachment: fixed; 
+    color: #f0f0f0;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- HEADER ADAPTATIVO --- */
+header.header-premium {
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+    pointer-events: none; 
+}
+
+.logo-premium {
+    pointer-events: auto;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 4vw, 1.5rem); /* Tamanho ajustável */
+    font-weight: 900;
+    color: white;
+    text-shadow: 2px 2px 0px rgba(255, 179, 71, 0.4);
+}
+
+.logo-premium span { color: #FFB347; }
+
+/* --- PERFIL CLEAN --- */
+.user-profile { pointer-events: auto; }
+
+.btn-perfil-clean {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.2); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 5px 12px 5px 5px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+.avatar-container {
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #FFB347;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.avatar-clean { width: 100%; height: 100%; object-fit: cover; }
+
+.btn-perfil-clean span {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* --- HERO SECTION ADAPTATIVO --- */
+.hero-expedicao {
+    min-height: 80vh;
+    height: auto;
+    position: relative;
+    display: flex;
+    align-items: center; /* Centralizado verticalmente em mobile ajuda na leitura */
+    padding: 100px 6% 100px;
+    background-color: #0d1a26;
+}
+
+.hero-imagem-fundo {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+}
+
+.img-fundo {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+.sombra-inferior {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 80%; 
+    background: linear-gradient(to top, #1a2e41 10%, transparent 100%);
+    z-index: 2;
+}
+
+.divisor-curvo {
+    position: absolute;
+    bottom: -1px; left: 0; width: 100%; height: 60px;
+    background: #1a2e41;
+    clip-path: ellipse(85% 100% at 50% 100%);
+    z-index: 5;
+}
+
+/* --- CONTEÚDO DINÂMICO ADAPTATIVO --- */
+.conteudo-hero-premium {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    z-index: 10;
+    text-align: left;
+}
+
+.info-meta {
+    background: #FFB347;
+    color: #0d1a26;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.titulo-epico {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.2rem, 8vw, 4.5rem); /* Ajusta conforme a largura da tela */
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+}
+
+.legenda {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    font-weight: 500;
+    color: #e0e0e0;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    max-width: 550px;
+}
+
+.btn-expedicao {
+    padding: 15px 40px;
+    background-color: #FFB347;
+    color: #0d1a26;
+    border: none;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 6px 0px #c28836;
+}
+
+/* --- SEÇÃO DE CARDS ADAPTATIVOS --- */
+.galeria-descobretas {
+    padding: 40px 6% 60px;
+    background-color: #1a2e41;
+    position: relative;
+    z-index: 20;
+}
+
+.titulo-secao-premium {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: white;
+}
+
+.carrossel-premium {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 5px 30px; /* Espaço para a sombra não cortar */
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Esconde scroll no Firefox */
+}
+
+.carrossel-premium::-webkit-scrollbar { display: none; } /* Esconde scroll no Chrome/Safari */
+
+.card-premium {
+    /* MUDANÇA AQUI: Largura mais flexível e altura proporcional */
+    min-width: 200px; 
+    max-width: 240px;
+    height: 320px;    
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    
+    background-color: #0d1a26;
+    border-radius: 15px; /* Bordas mais arredondadas (Kids Style) */
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-premium img {
+    width: 100%;
+    height: 100%;
+    /* MUDANÇA AQUI: 'cover' ainda é necessário, mas ajustamos o posicionamento */
+    object-fit: cover;
+    object-position: center; 
+    transition: transform 0.5s ease;
+}
+
+/* Efeito de zoom controlado apenas no Hover */
+.card-premium:hover {
+    transform: translateY(-10px);
+    border-color: #FFB347;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+.card-premium:hover img {
+    transform: scale(1.1); /* O zoom só acontece quando você passa o mouse */
+}
+
+.card-premium-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 25px 15px 15px;
+    /* Gradiente mais suave para não tampar a arte */
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 20%, transparent 100%);
+    color: white;
+    z-index: 2;
+}
+
+/* Ajuste Mobile para os Cards */
+@media (max-width: 480px) {
+    .card-premium {
+        min-width: 180px;
+        height: 280px;
+    }
+    .titulo-secao-premium {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+}

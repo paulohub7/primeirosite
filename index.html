@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bíblia dos Aventureiros - O Reino</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header-premium">
+        <div class="logo-premium">BÍBLIA DOS <span>AVENTUREIROS</span></div>
+        
+        <div class="user-profile">
+            <button class="btn-perfil-clean">
+                <div class="avatar-container">
+                    <img src="assets/usuario.png" alt="Perfil" class="avatar-clean">
+                </div>
+                <span class="texto-entrar">Entrar</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-expedicao">
+            <div class="hero-imagem-fundo">
+                <img src="assets/fundo.png" id="img-topo" alt="Crianças Aventureiras" class="img-fundo">
+                <div class="sombra-inferior"></div>
+                <div class="divisor-curvo"></div>
+            </div>
+            
+            <div class="conteudo-hero-premium" id="hero-dinamico">
+                <div class="fade-in">
+                    <div class="info-meta">BEM-VINDO, AVENTUREIRO</div>
+                    <h1 class="titulo-epico">O REINO DOS ANJINHOS</h1>
+                    <p class="legenda">Escolha uma das histórias abaixo para começar sua grande jornada pelo conhecimento!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="galeria-descobretas">
+            <h2 class="titulo-secao-premium">HISTORINHAS</h2>
+            
+            <div class="carrossel-premium">
+                <div class="card-premium">
+                    <img src="assets/davi-e-golias.png" alt="Davi e Golias">
+                    <div class="card-premium-info">
+                        <h3>DAVI E GOLIAS</h3>
+                        <span class="tag-premium">AÇÃO</span>
+                    </div>
+                </div>
+
+                <div class="card-premium">
+                    <img src="assets/daniel-e-os-leoes.png" alt="Daniel e os Leões">
+                    <div class="card-premium-info">
+                        <h3>DANIEL E OS LEÕES</h3>
+                        <span class="tag-premium">ÉPICO</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function selecionarHistoria(titulo, categoria, imagemSrc) {
+            const container = document.getElementById('hero-dinamico');
+            const imagemTopo = document.getElementById('img-topo');
+            
+            imagemTopo.style.opacity = "0";
+            
+            setTimeout(() => {
+                imagemTopo.src = imagemSrc;
+                imagemTopo.onload = () => {
+                    imagemTopo.style.opacity = "0.7";
+                };
+            }, 300);
+
+            container.innerHTML = `
+                <div class="fade-in">
+                    <div class="info-meta">JORNADA SELECIONADA</div>
+                    <h1 class="titulo-epico">${titulo}</h1>
+                    <p class="legenda">Prepare seu coração! Você está prestes a entrar na história de ${titulo}.</p>
+                    <button class="btn-expedicao">INICIAR AVENTURA ▶</button>
+                </div>
+            `;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('.card-premium').forEach(card => {
+            card.addEventListener('click', () => {
+                const titulo = card.querySelector('h3').innerText;
+                const categoria = card.querySelector('.tag-premium').innerText;
+                const imagemSrc = card.querySelector('img').getAttribute('src');
+                selecionarHistoria(titulo, categoria, imagemSrc);
+            });
+        });
+    </script>
+</body>
+</html>

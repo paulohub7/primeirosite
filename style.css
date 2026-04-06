@@ -269,70 +269,100 @@ img {
     box-shadow: 0 2px 0px #c28836;
 }
 
-/* --- CARDS ADAPTATIVOS --- */
-.galeria-descobretas { /* Seção de cards abaixo da hero */
-    padding: 60px 6% 80px;        /* Espaçamento interno da seção de cards */
-    background-color: #1a2e41;    /* Cor de fundo sólida */
+/* --- SEÇÃO DE HISTORINHAS (CARDS) --- */
+.galeria-descobretas {
+    padding: 60px 6% 80px;
+    background-color: #1a2e41; /* Cor de fundo da seção */
     position: relative;
-    z-index: 20;                  /* Fica acima da hero */
+    z-index: 20;
 }
 
-.titulo-secao-premium { /* Título da seção de cards */
-    font-family: 'Cinzel', serif; /* Fonte com estilo clássico/épico */
-    color: #FFB347;               /* Cor de destaque laranja dourado */
-    font-size: 1.8rem;           /* Tamanho grande para destacar a seção */
-    margin-bottom: 30px;         /* Espaço abaixo do título para separar dos cards */
+.titulo-secao-premium {
+    font-family: 'Cinzel', serif;
+    color: #FFB347;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
 }
 
-.carrossel-premium { /* Container dos cards com estilo de carrossel horizontal */
-    display: flex;                /* Coloca os cards lado a lado */
-    gap: 20px;                    /* Espaço entre os cards */
-    overflow-x: auto;             /* Permite rolar para os lados se os cards estourarem a tela */
-    padding-bottom: 30px;         /* Espaço para a sombra dos cards não ser cortada */
-    scrollbar-width: none;        /* Esconde barra de rolagem no Firefox */
+.carrossel-premium {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* Permite o deslize horizontal no mobile */
+    padding-bottom: 30px;
+    scrollbar-width: none; /* Esconde barra no Firefox */
+    -webkit-overflow-scrolling: touch; /* Deixa o deslize suave no iOS */
 }
 
-/* Esconde barra de rolagem no Chrome, Safari e Edge */
-.carrossel-premium::-webkit-scrollbar { display: none; }
+/* Esconde barra de rolagem no Chrome/Safari */
+.carrossel-premium::-webkit-scrollbar { 
+    display: none; 
+}
 
-.card-premium { /* Estilização básica dos cards */
-    min-width: 220px;             /* Largura mínima de cada card */
-    max-width: 260px;             /* Largura máxima de cada card */
-    height: 350px;                /* Altura fixa dos cards */
-    flex-shrink: 0;               /* Impede que o flexbox amasse o card */
+.card-premium {
+    min-width: 220px;
+    max-width: 260px;
+    height: 350px;
+    flex-shrink: 0;
     border-radius: 15px;
-    overflow: hidden;             /* Garante que a imagem respeite o arredondamento */
+    overflow: hidden;
     position: relative;
     cursor: pointer;
-    transition: all 0.4s ease;    /* Suaviza o efeito de hover */
     background: #0d1a26;
-    border: 2px solid transparent; /* Borda invisível por padrão */
+    border: 2px solid transparent;
+    transition: all 0.4s ease;
+
+    /* --- PROTEÇÃO TOTAL MOBILE --- */
+    /* Remove o brilho cinza/azul ao tocar no card */
+    -webkit-tap-highlight-color: transparent !important;
+    /* Remove a borda de foco que o Android coloca após o clique */
+    outline: none !important;
+    /* Impede que o usuário selecione textos internos do card por engano */
+    user-select: none;
+    -webkit-user-select: none;
 }
 
-.card-premium img { /* Imagem dentro do card */
-    width: 100%; /* Imagem ocupa toda a largura do card */
-    height: 100%; /* Imagem ocupa toda a altura do card */
-    object-fit: cover;            /* Imagem preenche o card sem distorcer */
-    transition: transform 0.5s ease; /* Suaviza o zoom no hover */
+/* Garante que mesmo após o clique, a borda do navegador não volte */
+.card-premium:focus, 
+.card-premium:active {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
-/* Efeito ao passar o mouse no card */
-.card-premium:hover {
-    transform: translateY(-0px); /* Move o card para cima */
-    border-color: #FFB347;        /* Acende a borda dourada */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5); /* Sombra forte para efeito de flutuação */
+.card-premium:hover { /* Efeito de hover para PC */
+    transform: translateY(-5px); /* Leve subida no PC */
+    border-color: #FFB347; /* Acende a borda dourada */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
 }
 
-.card-premium:hover img { /* Efeito de zoom na imagem ao passar o mouse */
-    transform: scale(1.1);        /* Dá um leve zoom na imagem interna */
+.card-premium img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    /* Impede que a imagem seja "arrastada" no mobile */
+    pointer-events: none;
+    -webkit-user-drag: none;
 }
 
-.card-premium-info { /* Container para as informações sobre o card */
-    position: absolute;           /* Posiciona as informações sobre o card */
-    bottom: 0; width: 100%;
+.card-premium:hover img {
+    transform: scale(1.1); /* Zoom suave na imagem */
+}
+
+.card-premium-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     padding: 25px 15px 15px;
-    /* Degradê preto no fundo do texto para garantir leitura sobre a imagem */
+    /* Degradê para facilitar a leitura do título da história */
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 30%, transparent);
+}
+
+/* --- AJUSTE DE RESPONSIVIDADE PARA OS CARDS --- */
+@media (max-width: 480px) {
+    .card-premium {
+        min-width: 190px; /* Cards menores para telas pequenas */
+        height: 280px;
+    }
 }
 
 /* --- MEDIA QUERIES (RESPONSIVIDADE) --- */

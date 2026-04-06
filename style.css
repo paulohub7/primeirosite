@@ -272,7 +272,7 @@ img {
 /* --- SEÇÃO DE HISTORINHAS (CARDS) --- */
 .galeria-descobretas {
     padding: 60px 6% 80px;
-    background-color: #1a2e41; /* Cor de fundo da seção */
+    background-color: #1a2e41;
     position: relative;
     z-index: 20;
 }
@@ -287,13 +287,12 @@ img {
 .carrossel-premium {
     display: flex;
     gap: 20px;
-    overflow-x: auto; /* Permite o deslize horizontal no mobile */
+    overflow-x: auto;
     padding-bottom: 30px;
-    scrollbar-width: none; /* Esconde barra no Firefox */
-    -webkit-overflow-scrolling: touch; /* Deixa o deslize suave no iOS */
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Esconde barra de rolagem no Chrome/Safari */
 .carrossel-premium::-webkit-scrollbar { 
     display: none; 
 }
@@ -311,27 +310,20 @@ img {
     border: 2px solid transparent;
     transition: all 0.4s ease;
 
-    /* --- PROTEÇÃO TOTAL MOBILE --- */
-    /* Remove o brilho cinza/azul ao tocar no card */
+    /* BLINDAGEM NO CARD */
     -webkit-tap-highlight-color: transparent !important;
-    /* Remove a borda de foco que o Android coloca após o clique */
     outline: none !important;
-    /* Impede que o usuário selecione textos internos do card por engano */
     user-select: none;
     -webkit-user-select: none;
 }
 
-/* Garante que mesmo após o clique, a borda do navegador não volte */
+/* ESTADOS DE FOCO DO CARD - FORÇANDO REMOÇÃO DE BORDAS */
 .card-premium:focus, 
-.card-premium:active {
+.card-premium:active,
+.card-premium:focus-within {
     outline: none !important;
+    box-shadow: none; /* Remove qualquer sombra de foco do navegador */
     -webkit-tap-highlight-color: transparent !important;
-}
-
-.card-premium:hover { /* Efeito de hover para PC */
-    transform: translateY(-5px); /* Leve subida no PC */
-    border-color: #FFB347; /* Acende a borda dourada */
-    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
 }
 
 .card-premium img {
@@ -339,13 +331,23 @@ img {
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
-    /* Impede que a imagem seja "arrastada" no mobile */
-    pointer-events: none;
+
+    /* --- PROTEÇÃO CRÍTICA NA IMAGEM --- */
+    pointer-events: none;       /* Impede que a imagem receba o clique diretamente */
     -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent !important;
+    outline: none !important;
+}
+
+/* Garante que o hover e efeitos continuem funcionando através do card */
+.card-premium:hover {
+    transform: translateY(-5px);
+    border-color: #FFB347;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
 }
 
 .card-premium:hover img {
-    transform: scale(1.1); /* Zoom suave na imagem */
+    transform: scale(1.1);
 }
 
 .card-premium-info {
@@ -353,8 +355,9 @@ img {
     bottom: 0;
     width: 100%;
     padding: 25px 15px 15px;
-    /* Degradê para facilitar a leitura do título da história */
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 30%, transparent);
+    /* Proteção no container de info também */
+    pointer-events: none; 
 }
 
 /* --- AJUSTE DE RESPONSIVIDADE PARA OS CARDS --- */
